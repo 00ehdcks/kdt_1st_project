@@ -55,8 +55,13 @@ app.get('/', (req, res) => {
 
 // patient 테이블에서 환자 정보를 가져오는 API 엔드포인트
 app.get('/patients', (req, res) => {
+  const { page = 1, perPage = 15, name = '' } = req.query;
+  const offset = (page - 1) * perPage;
+  const nameFilter = name ? `WHERE name LIKE '%${name}%'` : '';
+
   // patient 테이블에서 환자 정보를 가져오는 쿼리
-  const query = 'SELECT * FROM patient';
+  const query = `SELECT * FROM patient ${nameFilter} LIMIT ${perPage} OFFSET ${offset}`;
+  const countQuery = `SELECT COUNT(*) as count FROM patient ${nameFilter}`;
 
   // 쿼리 실행
   connection.query(query, (error, results, fields) => {
@@ -65,8 +70,21 @@ app.get('/patients', (req, res) => {
       return res.status(500).send('Internal server error');
     }
 
-    // 결과를 JSON 형식으로 응답
-    res.json(results);
+    connection.query(countQuery, (countError, countResults) => {
+      if (countError) {
+        console.error('Error executing count query:', countError);
+        return res.status(500).send('Internal server error');
+      }
+
+      const totalPatients = countResults[0].count;
+      const totalPages = Math.ceil(totalPatients / perPage);
+
+      // 결과를 JSON 형식으로 응답
+      res.json({
+        patients: results,
+        totalPages,
+      });
+    });
   });
 });
 

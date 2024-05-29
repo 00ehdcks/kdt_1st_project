@@ -146,8 +146,15 @@ h1 {
 .search-box {
   position: relative;
   margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-
+.search-box .reset-btn {
+  justify-content: flex-end;
+  width: 80px;
+  margin-top: 10px;
+}
 .search-box input {
   width: 240px;
   height: 38px;
@@ -199,4 +206,29 @@ hr {
 }
 #patient-table td {
   font-size: 16px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.pagination button {
+  width: 35px;
+  height: 35px;
+  margin: 0 5px;
+
+  border: none;
+  border-radius: 50%;
+  background-color: #cacaca;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #b6b6b6;
+}
+
+.info-table {
+  height: 659px;
 }
