@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>종합 환자 정보</title>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Poetsen+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-wrap">
+      <div class="top">
+        <div>
+          <h1>환자 정보</h1>
+          <div class="user">
+            <span id="name">홍길동</span>
+            <span>:</span>
+            <span id="department">소아과</span>
+            <button class="logout-btn" id="logout-button">로그아웃</button>
+          </div>
+        </div>
+        <div class="search-box">
+          <input type="text" placeholder="이름으로 검색" />
+          <span class="bx bx-search-alt-2"></span>
+        </div>
+      </div>
+      <hr />
+      <table id="patient-table">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>생년월일</th>
+            <th>전화번호</th>
+            <th>진료과</th>
+            <th>병명</th>
+            <th>최근방문일</th>
+          </tr>
+        </thead>
+        <tbody id="patient-table-body"></tbody>
+      </table>
+      <div class="pagination"></div>
+    </div>
+    <script src="/src/info.js"></script>
+  </body>
+</html>
